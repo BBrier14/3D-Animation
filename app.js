@@ -17,7 +17,19 @@ function init() {
 	const near = 0.1;
 	const far = 500;
 
+	//Camera Setup
 	camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-
 	camera.position.set(-50, 40, 350);
+
+	//Renderer
+	renderer = new THREE.WebGLRenderer({ antialias: true });
+	renderer.setSize(container.clientWidth, container.clientHeight);
+	renderer.setPixelRatio(window.devicePixelRatio);
+
+	container.appendChild(renderer.domElement);
+	//Load Model
+	let loader = new THREE.GLTFLoader();
+	loader.load('./3D/scene.gltf', function(gltf) {
+		scene.add(gltf.scene);
+	});
 }
